@@ -1,11 +1,11 @@
 import Question from "./Question";
 import { useReducer } from "react";
-
+// Наше начальное состояние
 const initialState = {
   questions: [],
   currentQuestionIndex: 0,
 };
-
+// То как наше состояние будет меняться
 const reducer = (state, action) => {
   console.log("reducer", state, action);
   if (action.type === "NEXT_QUESTION") {
@@ -27,6 +27,7 @@ const Quiz = () => {
         <Question />
         <div
           className="next-button"
+          // dispatch – нужен для изменения состояния
           onClick={() => dispatch({ type: "NEXT_QUESTION" })}
         >
           Next question
