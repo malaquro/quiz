@@ -1,34 +1,19 @@
 import Question from "./Question";
-import { useReducer } from "react";
-// Наше начальное состояние
-const initialState = {
-  questions: [],
-  currentQuestionIndex: 0,
-};
-// То как наше состояние будет меняться
-const reducer = (state, action) => {
-  console.log("reducer", state, action);
-  if (action.type === "NEXT_QUESTION") {
-    return {
-      ...state,
-      currentQuestionIndex: state.currentQuestionIndex + 1,
-    };
-  }
-  return state;
-};
+import { useContext, useReducer } from "react";
+import { QuizContext } from "../contexts/quiz";
 
 const Quiz = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  console.log("state", state);
+  const [quizState, dispatch] = useContext(QuizContext);
+  console.log("quizState", quizState);
   return (
     <div className="quiz">
       <div>
         <div className="score">Question 1/8</div>
-        <Question />
+        <Question questions={quizState.questions} />
         <div
           className="next-button"
           // dispatch – нужен для изменения состояния
-          onClick={() => dispatch({ type: "NEXT_QUESTION" })}
+          onClick={() => dispatch({ type: "NEXT_QUESTION" })} // type: "NEXT_QUESTION" – это action
         >
           Next question
         </div>
